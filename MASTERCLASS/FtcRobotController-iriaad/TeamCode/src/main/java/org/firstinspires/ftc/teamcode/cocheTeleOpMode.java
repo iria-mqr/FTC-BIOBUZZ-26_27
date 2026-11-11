@@ -17,8 +17,10 @@ public class cocheTeleOpMode extends OpMode {
     //atributos
     public int marcha;
     public double[] vMarchas;
+    public boolean arranca;
     public boolean r;
     public boolean warning;
+
 
     //componentes
     DcMotorEx motor1;
@@ -75,16 +77,25 @@ public class cocheTeleOpMode extends OpMode {
         }
 
         ///ACELERADOR/FRENO
-        if(gamepad1.right_trigger_pressed && !warning){
+        double v = vMarchas[marcha];
+        if(gamepad1.right_trigger_pressed)
+            arranca = true;
+        else if (gamepad1.leftTriggerWasPressed())
+            arranca = false;
+
+
+        if(!arranca || warning){
+            marcha = 0;
+            setVelocityMotors(0);
+        }else{
             //velocidad
             if(r){
                 setVelocityMotors(-500);
             }else{
-                setVelocityMotors(vMarchas[marcha]);
+                setVelocityMotors(v);
             }
-        } else if (gamepad1.left_trigger_pressed || warning) {
-            setVelocityMotors(0);
         }
+
 
 
         ///WARNING
