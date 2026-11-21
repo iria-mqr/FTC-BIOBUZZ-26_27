@@ -10,7 +10,7 @@ import org.firstinspires.ftc.teamcode.util.Debouncer;
 
 public class Shooter {
     private DcMotorEx shooter;
-    private double velocity = 500;
+    private double velocity = 1500;
     private boolean shooting;
     private Debouncer shooterDebouncer;
 
@@ -20,17 +20,11 @@ public class Shooter {
         shooter = hardwareMap.get(DcMotorEx.class, "shooter");
         shooter.setDirection(DcMotorSimple.Direction.REVERSE);
 
-        intakeDebouncer = new Debouncer(200);
+        shooterDebouncer = new Debouncer(200);
     }
 
-    public void forwardMovement() {}
-
-    public void strafingMovement(){}
-
-    public void rotatingMovement(){}
-
     public void pruebaTeleOp(Gamepad gamepad, Telemetry telemetry){
-        if(gamepad.cross && intakeDebouncer.isReady()){
+        if(gamepad.cross && shooterDebouncer.isReady()){
             shooting = !shooting;
         }
 
@@ -41,9 +35,9 @@ public class Shooter {
         }
 
 
-        if(gamepad.dpad_up){
+        if(gamepad.dpad_right){
             velocity += 20;
-        }else if(gamepad.dpad_down){
+        }else if(gamepad.dpad_left){
             velocity -= 20;
         }
     }

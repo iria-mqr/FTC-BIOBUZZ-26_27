@@ -28,11 +28,6 @@ public class Intake {
         intakeDebouncer = new Debouncer(200);
     }
 
-    public void forwardMovement() {}
-
-    public void strafingMovement(){}
-
-    public void rotatingMovement(){}
 
     public void pruebaTeleOp(Gamepad gamepad, Telemetry telemetry){
         if(gamepad.cross && intakeDebouncer.isReady()){
