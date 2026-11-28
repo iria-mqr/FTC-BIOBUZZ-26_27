@@ -18,8 +18,8 @@ public class testTeleOpMode extends OpMode {
 
     @Override
     public void init() {
-        driveTrain = new SimpleDriveTrain(hardwareMap);
-        intake = new Intake(hardwareMap);
+        //driveTrain = new SimpleDriveTrain(hardwareMap);
+        //intake = new Intake(hardwareMap);
         shooter = new Shooter(hardwareMap);
     }
 
@@ -32,8 +32,8 @@ public class testTeleOpMode extends OpMode {
 
     @Override
     public void loop() {
-        driveTrain.TeleOp(gamepad1, telemetry);
-        intake.pruebaTeleOp(gamepad1, telemetry);
+        //driveTrain.TeleOp(gamepad1, telemetry);
+        //intake.pruebaTeleOp(gamepad1, telemetry);
         shooter.pruebaTeleOp(gamepad1,telemetry);
 
         telemetry.update();

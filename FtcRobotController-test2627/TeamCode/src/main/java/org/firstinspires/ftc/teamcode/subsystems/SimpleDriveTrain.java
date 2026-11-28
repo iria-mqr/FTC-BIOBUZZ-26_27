@@ -19,7 +19,6 @@ public class SimpleDriveTrain {
     private double rotate = 0;
     private IMU imu;
     private  double yawAngle;
-    private double yawOffset;
     private Debouncer resetDebouncer;
 
 
@@ -42,10 +41,6 @@ public class SimpleDriveTrain {
                 RevHubOrientationOnRobot.UsbFacingDirection.UP
         ));
         imu.initialize(parameters);
-
-
-        yawOffset = 0;
-
         resetDebouncer = new Debouncer(200);
     }
 
@@ -61,13 +56,13 @@ public class SimpleDriveTrain {
         strafe = -gamepad.left_stick_x;
         rotate = -gamepad.right_stick_x;
 
-        //double adjustedDrive = drive * Math.cos(Math.toRadians(yawAngle)) - strafe * Math.sin(Math.toRadians(yawAngle));
-        //double adjustedStrafe = drive * Math.sin(Math.toRadians(yawAngle)) + strafe * Math.cos(Math.toRadians(yawAngle));
+        double adjustedDrive = drive * Math.cos(Math.toRadians(yawAngle)) - strafe * Math.sin(Math.toRadians(yawAngle));
+        double adjustedStrafe = drive * Math.sin(Math.toRadians(yawAngle)) + strafe * Math.cos(Math.toRadians(yawAngle));
 
-        double frontLeftPower = (drive + strafe + rotate);
-        double frontRightPower = (drive - strafe - rotate);
-        double backLeftPower = (drive - strafe + rotate);
-        double backRightPower = (drive + strafe - rotate);
+        double frontLeftPower = (adjustedDrive + adjustedStrafe + rotate);
+        double frontRightPower = (adjustedDrive - adjustedStrafe - rotate);
+        double backLeftPower = (adjustedDrive - adjustedStrafe + rotate);
+        double backRightPower = (adjustedDrive + adjustedStrafe - rotate);
 
         //Power
         frontLeft.setPower(frontLeftPower);

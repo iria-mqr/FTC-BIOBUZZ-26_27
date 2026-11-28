@@ -46,6 +46,8 @@ public class Intake {
         }else if(gamepad.dpad_down){
             velocity -= 20;
         }
+        telemetry.addData("intake velocity", velocity);
+
     }
 
 }

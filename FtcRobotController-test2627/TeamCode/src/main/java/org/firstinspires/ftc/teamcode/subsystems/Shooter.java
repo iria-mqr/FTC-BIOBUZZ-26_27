@@ -18,17 +18,15 @@ public class Shooter {
 
     public Shooter(HardwareMap hardwareMap){
         shooter = hardwareMap.get(DcMotorEx.class, "shooter");
-        shooter.setDirection(DcMotorSimple.Direction.REVERSE);
+
 
         shooterDebouncer = new Debouncer(200);
     }
 
     public void pruebaTeleOp(Gamepad gamepad, Telemetry telemetry){
-        if(gamepad.cross && shooterDebouncer.isReady()){
-            shooting = !shooting;
-        }
 
-        if(shooting){
+
+        if(gamepad.right_trigger > 0.9){
             shooter.setVelocity(velocity);
         }else{
             shooter.setVelocity(0);
@@ -40,5 +38,7 @@ public class Shooter {
         }else if(gamepad.dpad_left){
             velocity -= 20;
         }
+
+        telemetry.addData("shooter velocity", velocity);
     }
 }
